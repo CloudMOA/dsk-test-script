@@ -15,10 +15,15 @@ print('dbname: ' + dbname)
 print('user: ' + user)
 print('password: ' + password)
 print('---------------------')
-querys = open('query.sql', 'r')
-queryList = querys.read().split(';')
+queryList = []
+count = 0
 while True:
     try:
+        if count % 100 == 0:
+            querys = open('query.sql', 'r')
+            queryList = querys.read().split(';')
+            querys.close()
+            count = 0
         connection = psycopg2.connect(
             host=host, dbname=dbname, user=user, password=password, port=port)
         cur = connection.cursor()
@@ -34,4 +39,5 @@ while True:
     except:
         print('Error')
         break
+    count = count + 1
     print('---------------------')
