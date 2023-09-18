@@ -8,8 +8,9 @@ dbname = os.environ.get('MYSQL_DB_NAME')
 user = os.environ.get('MYSQL_DB_USER')
 password = os.environ.get('MYSQL_DB_PASSWD')
 sleeptime = int(os.environ.get('MARIA_SLEEP'))
-filepath1 = "/db_script/mysql_query.sql"
-filepath2 = "/db_script/mysql_lock_query.sql"
+initFilePath = "/db_script/mysql_init_query.sql"
+loadFilePath = "/db_script/mysql_load_query.sql"
+lockFilePath = "/db_script/mysql_lock_query.sql"
 
 # host = "10.10.43.100"
 # port = 31302
@@ -17,8 +18,9 @@ filepath2 = "/db_script/mysql_lock_query.sql"
 # user = "root"
 # password = "root"
 # sleeptime = 5
-# filepath1 = "mysql_query.sql"
-# filepath2 = "mysql_lock_query.sql"
+# initFilePath = "mysql_init_query.sql"
+# loadFilePath = "mysql_load_query.sql"
+# lockFilePath = "mysql_lock_query.sql"
 
 print('---------------------')
 print('host: ' + host)
@@ -29,22 +31,45 @@ print('password: ' + password)
 print('sleep: ' + str(sleeptime))
 print('---------------------')
 
-queryList = []
+initQueryList = []
+loadQueryList = []
 lockQueryList = []
 count = 0
 
-querys = open(filepath1, 'r')
-queryList = querys.read().split(';')
+querys = open(initFilePath, 'r')
+initQueryList = querys.read().split(';')
 querys.close()
-querys = open(filepath2, 'r')
+querys = open(loadFilePath, 'r')
+loadQueryList = querys.read().split(';')
+querys.close()
+querys = open(lockFilePath, 'r')
 lockQueryList = querys.read().split(';')
 querys.close()
+
+try:
+    connection = pymysql.connect(
+        host=host, database=dbname, user=user, password=password, port=port)
+    connection.autocommit = True
+
+    cur = connection.cursor()
+    for query in initQueryList:
+        query = query.strip()
+        if query != '':
+            print(query)
+            cur.execute(query)
+            time.sleep(1)
+    cur.close()
+    connection.close()
+except:
+    print('Error')
+time.sleep(sleeptime)
+
 while True:
     if count > 3:
-        querys = open(filepath1, 'r')
-        queryList = querys.read().split(';')
+        querys = open(loadFilePath, 'r')
+        loadQueryList = querys.read().split(';')
         querys.close()
-        querys = open(filepath2, 'r')
+        querys = open(lockFilePath, 'r')
         lockQueryList = querys.read().split(';')
         querys.close()
         count = 0
@@ -55,7 +80,7 @@ while True:
         connection.autocommit = True
 
         cur = connection.cursor()
-        for query in queryList:
+        for query in loadQueryList:
             query = query.strip()
             if query != '':
                 print(query)
