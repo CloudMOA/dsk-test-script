@@ -20,7 +20,6 @@ lockFilePath = "/db_script/pg_lock_query.sql"
 # sleeptime = 5
 # initFilePath = "pg_init_query.sql"
 # loadFilePath = "pg_load_query.sql"
-# lockFilePath = "pg_lock_query.sql"
 
 print('---------------------')
 print('host: ' + host)
@@ -33,7 +32,6 @@ print('---------------------')
 
 initQueryList = []
 loadQueryList = []
-lockQueryList = []
 count = 0
 
 querys = open(initFilePath, 'r')
@@ -42,35 +40,29 @@ querys.close()
 querys = open(loadFilePath, 'r')
 loadQueryList = querys.read().split(';')
 querys.close()
-querys = open(lockFilePath, 'r')
-lockQueryList = querys.read().split(';')
-querys.close()
 
-try:
-    connection = psycopg2.connect(
-        host=host, dbname=dbname, user=user, password=password, port=port)
-    connection.autocommit = True
+# try:
+#     connection = psycopg2.connect(
+#         host=host, dbname='postgres', user=user, password=password, port=port)
+#     connection.autocommit = True
 
-    cur = connection.cursor()
-    for query in initQueryList:
-        query = query.strip()
-        if query != '':
-            print(query)
-            cur.execute(query)
-            time.sleep(1)
-    cur.close()
-    connection.close()
-except:
-    print('Error')
-time.sleep(sleeptime)
+#     cur = connection.cursor()
+#     for query in initQueryList:
+#         query = query.strip()
+#         if query != '':
+#             print(query)
+#             cur.execute(query)
+#             time.sleep(1)
+#     cur.close()
+#     connection.close()
+# except:
+#     print('Error')
+# time.sleep(sleeptime)
 
 while True:
     if count > 3:
         querys = open(loadFilePath, 'r')
         loadQueryList = querys.read().split(';')
-        querys.close()
-        querys = open(lockFilePath, 'r')
-        lockQueryList = querys.read().split(';')
         querys.close()
         count = 0
 
@@ -90,27 +82,6 @@ while True:
         connection.close()
     except:
         print('Error')
-    time.sleep(sleeptime)
-
-    try:
-        connection = psycopg2.connect(
-            host=host, dbname=dbname, user=user, password=password, port=port)
-        connection.autocommit = False
-
-        for query in lockQueryList:
-            query = query.strip()
-            if query != '':
-                cur = connection.cursor()
-                print(query)
-                cur.execute(query)
-                time.sleep(30)
-                print('Rollback')
-                connection.rollback()
-                cur.close()
-        connection.close()
-    except:
-        print('Error')
-
     time.sleep(sleeptime)
     count = count + 1
     print('---------------------')

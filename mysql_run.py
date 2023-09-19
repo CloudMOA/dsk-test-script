@@ -2,25 +2,23 @@ import pymysql
 import time
 import os
 
-host = os.environ.get('MYSQL_DB_HOST')
-port = int(os.environ.get('MYSQL_DB_PORT'))
-dbname = os.environ.get('MYSQL_DB_NAME')
-user = os.environ.get('MYSQL_DB_USER')
-password = os.environ.get('MYSQL_DB_PASSWD')
-sleeptime = int(os.environ.get('MARIA_SLEEP'))
-initFilePath = "/db_script/mysql_init_query.sql"
-loadFilePath = "/db_script/mysql_load_query.sql"
-lockFilePath = "/db_script/mysql_lock_query.sql"
+# host = os.environ.get('MYSQL_DB_HOST')
+# port = int(os.environ.get('MYSQL_DB_PORT'))
+# dbname = os.environ.get('MYSQL_DB_NAME')
+# user = os.environ.get('MYSQL_DB_USER')
+# password = os.environ.get('MYSQL_DB_PASSWD')
+# sleeptime = int(os.environ.get('MARIA_SLEEP'))
+# initFilePath = "/db_script/mysql_init_query.sql"
+# loadFilePath = "/db_script/mysql_load_query.sql"
 
-# host = "10.10.43.100"
-# port = 31302
-# dbname = "tpcc"
-# user = "root"
-# password = "root"
-# sleeptime = 5
-# initFilePath = "mysql_init_query.sql"
-# loadFilePath = "mysql_load_query.sql"
-# lockFilePath = "mysql_lock_query.sql"
+host = "10.10.43.105"
+port = 31302
+dbname = "tpcc"
+user = "root"
+password = "root"
+sleeptime = 5
+initFilePath = "mysql_init_query.sql"
+loadFilePath = "mysql_load_query.sql"
 
 print('---------------------')
 print('host: ' + host)
@@ -33,7 +31,6 @@ print('---------------------')
 
 initQueryList = []
 loadQueryList = []
-lockQueryList = []
 count = 0
 
 querys = open(initFilePath, 'r')
@@ -42,13 +39,10 @@ querys.close()
 querys = open(loadFilePath, 'r')
 loadQueryList = querys.read().split(';')
 querys.close()
-querys = open(lockFilePath, 'r')
-lockQueryList = querys.read().split(';')
-querys.close()
 
 try:
     connection = pymysql.connect(
-        host=host, database=dbname, user=user, password=password, port=port)
+        host=host, database='mysql', user=user, password=password, port=port)
     connection.autocommit = True
 
     cur = connection.cursor()
@@ -69,9 +63,6 @@ while True:
         querys = open(loadFilePath, 'r')
         loadQueryList = querys.read().split(';')
         querys.close()
-        querys = open(lockFilePath, 'r')
-        lockQueryList = querys.read().split(';')
-        querys.close()
         count = 0
 
     try:
@@ -90,27 +81,6 @@ while True:
         connection.close()
     except:
         print('Error')
-    time.sleep(sleeptime)
-
-    try:
-        connection = pymysql.connect(
-            host=host, database=dbname, user=user, password=password, port=port)
-        connection.autocommit = False
-
-        for query in lockQueryList:
-            query = query.strip()
-            if query != '':
-                cur = connection.cursor()
-                print(query)
-                cur.execute(query)
-                time.sleep(30)
-                print('Rollback')
-                connection.rollback()
-                cur.close()
-        connection.close()
-    except:
-        print('Error')
-
     time.sleep(sleeptime)
     count = count + 1
     print('---------------------')
