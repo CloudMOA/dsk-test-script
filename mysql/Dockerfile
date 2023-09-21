@@ -10,4 +10,4 @@ ENV DB_USER "postgres"
 ENV DB_PASSWD "root"
 ENV SLEEP "60"
 
-ENTRYPOINT [ "/db_script/start.sh" ]
+ENTRYPOINT [ "./start.sh" ]

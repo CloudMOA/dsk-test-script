@@ -15,3 +15,4 @@ echo "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
 echo "DROP HAMMERDB SCHEMA"
 ./hammerdbcli py auto ./mysql_tprocc_deleteschema.py
 echo "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
+
