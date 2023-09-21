@@ -2,23 +2,23 @@ import pymysql
 import time
 import os
 
-# host = os.environ.get('MYSQL_DB_HOST')
-# port = int(os.environ.get('MYSQL_DB_PORT'))
-# dbname = os.environ.get('MYSQL_DB_NAME')
-# user = os.environ.get('MYSQL_DB_USER')
-# password = os.environ.get('MYSQL_DB_PASSWD')
-# sleeptime = int(os.environ.get('MARIA_SLEEP'))
-# initFilePath = "/db_script/mysql_init_query.sql"
-# loadFilePath = "/db_script/mysql_load_query.sql"
+host = os.environ.get('MYSQL_DB_HOST')
+port = int(os.environ.get('MYSQL_DB_PORT'))
+dbname = os.environ.get('MYSQL_DB_NAME')
+user = os.environ.get('MYSQL_DB_USER')
+password = os.environ.get('MYSQL_DB_PASSWD')
+sleeptime = int(os.environ.get('MARIA_SLEEP'))
+initFilePath = "/db_script/mysql_init_query.sql"
+loadFilePath = "/db_script/mysql_load_query.sql"
 
-host = "10.10.43.105"
-port = 31302
-dbname = "tpcc"
-user = "root"
-password = "root"
-sleeptime = 5
-initFilePath = "mysql_init_query.sql"
-loadFilePath = "mysql_load_query.sql"
+# host = "10.10.43.105"
+# port = 31302
+# dbname = "tpcc"
+# user = "root"
+# password = "root"
+# sleeptime = 5
+# initFilePath = "mysql_init_query.sql"
+# loadFilePath = "mysql_load_query.sql"
 
 print('---------------------')
 print('host: ' + host)

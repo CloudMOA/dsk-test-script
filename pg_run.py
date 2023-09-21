@@ -10,7 +10,6 @@ password = os.environ.get('PG_DB_PASSWD')
 sleeptime = int(os.environ.get('MARIA_SLEEP'))
 initFilePath = "/db_script/pg_init_query.sql"
 loadFilePath = "/db_script/pg_load_query.sql"
-lockFilePath = "/db_script/pg_lock_query.sql"
 
 # host = "10.10.43.105"
 # port = 32233
