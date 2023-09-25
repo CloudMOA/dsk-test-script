@@ -9,7 +9,8 @@ print(os.getenv('DB_PORT'))
 print(os.getenv('DB_NAME'))
 print(os.getenv('DB_USER'))
 print(os.getenv('DB_PASSWD'))
-print(os.getenv('SLEEP'))
+print(os.getenv('EXE_MINUTES'))
+print(os.getenv('SLEEP_MINUTES'))
 
 dbset('db','mysql')
 dbset('bm','TPC-C')
@@ -25,10 +26,10 @@ diset('tpcc','mysql_user',os.getenv('DB_USER'))
 diset('tpcc','mysql_pass',os.getenv('DB_PASSWD'))
 diset('tpcc','mysql_dbase',os.getenv('DB_NAME'))
 diset('tpcc','mysql_storage_engine','innodb')
-if (warehouse >= 200): 
-    diset('tpcc','mysql_partition','true') 
+if (warehouse >= 200):
+    diset('tpcc','mysql_partition','true')
 else:
-    diset('tpcc','mysql_partition','false') 
+    diset('tpcc','mysql_partition','false')
 
 print("SCHEMA BUILD STARTED")
 buildschema()

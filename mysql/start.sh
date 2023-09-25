@@ -1,18 +1,27 @@
+#!/bin/bash
+
 export TMP=`pwd`/TMP
 mkdir -p $TMP
-echo "BUILD HAMMERDB SCHEMA"
-echo "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
-./hammerdbcli py auto /tpcc_script/mysql_tprocc_buildschema.py
-echo "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
 
+if [$ACTION == "create"]; then
+    echo "BUILD HAMMERDB SCHEMA"
+    echo "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
+    ./hammerdbcli py auto /tpcc_script/mysql_tprocc_buildschema.py
+    echo "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
+fi
 
-echo "RUN HAMMERDB TEST"
-echo "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
-./hammerdbcli py auto /tpcc_script/mysql_tprocc_run.py
-echo "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
+if [$ACTION == "run"]; then
+    while true; do
+        echo "RUN HAMMERDB TEST"
+        echo "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
+        ./hammerdbcli py auto /tpcc_script/mysql_tprocc_run.py
+        echo "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
+        sleep $SLEEP_SECONDS
+    done
+fi
 
-
-echo "DROP HAMMERDB SCHEMA"
-./hammerdbcli py auto /tpcc_script/mysql_tprocc_deleteschema.py
-echo "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
-
+if [$ACTION == "delete"]; then
+    echo "DROP HAMMERDB SCHEMA"
+    ./hammerdbcli py auto /tpcc_script/mysql_tprocc_deleteschema.py
+    echo "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-"
+fi

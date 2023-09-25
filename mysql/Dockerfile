@@ -11,6 +11,8 @@ ENV DB_PORT "32233"
 ENV DB_NAME "manager"
 ENV DB_USER "postgres"
 ENV DB_PASSWD "root"
-ENV SLEEP "60"
+ENV EXE_MINUTES "5"
+ENV SLEEP_SECONDS "60"
+ENV ACTION "run"
 
 ENTRYPOINT [ "/tpcc_script/start.sh" ]
