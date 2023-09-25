@@ -1,17 +1,17 @@
-# Mysql 부하기 (HammerDB)
+# maria 부하기 (HammerDB)
 
 ## Sample
 ```
-sudo docker run --name db-create-mysql -d --rm \
+sudo docker run --name db-create-maria -d --rm \
   -e DB_HOST=10.10.43.105 \
   -e DB_PORT=31302 \
   -e DB_NAME=tpcc \
   -e DB_USER=root \
   -e DB_PASSWD=root \
   -e ACTION=create \
-  nexus2.exem-oss.org/saas/dsk-test-script:db-load-mysql
+  nexus2.exem-oss.org/saas/dsk-test-script:db-load-maria
 
-sudo docker run --name db-run-mysql -d \
+sudo docker run --name db-run-maria -d \
   -e DB_HOST=10.10.43.105 \
   -e DB_PORT=31302 \
   -e DB_NAME=tpcc \
@@ -20,16 +20,16 @@ sudo docker run --name db-run-mysql -d \
   -e EXE_MINUTES=5 \
   -e SLEEP_SECONDS=60 \
   -e ACTION=run \
-  nexus2.exem-oss.org/saas/dsk-test-script:db-load-mysql
+  nexus2.exem-oss.org/saas/dsk-test-script:db-load-maria
 
-sudo docker run --name db-delete-mysql -d --rm \
+sudo docker run --name db-delete-maria -d --rm \
   -e DB_HOST=10.10.43.105 \
   -e DB_PORT=31302 \
   -e DB_NAME=tpcc \
   -e DB_USER=root \
   -e DB_PASSWD=root \
   -e ACTION=delete \
-  nexus2.exem-oss.org/saas/dsk-test-script:db-load-mysql
+  nexus2.exem-oss.org/saas/dsk-test-script:db-load-maria
 ```
 
 ## 환경변수

@@ -1,4 +1,4 @@
-FROM tpcorg/hammerdb:mysql
+FROM tpcorg/hammerdb:maria
 
 COPY *.sh /tpcc_script/
 COPY *.py /tpcc_script/
@@ -7,7 +7,7 @@ RUN chmod 755 /tpcc_script/*.sh
 RUN chmod 755 /tpcc_script/*.py
 
 ENV DB_HOST "10.10.43.105"
-ENV DB_PORT "31302"
+ENV DB_PORT "31305"
 ENV DB_NAME "tpcc"
 ENV DB_USER "root"
 ENV DB_PASSWD "root"
