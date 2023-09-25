@@ -22,6 +22,7 @@ diset('tpcc','mysql_user',os.getenv('DB_USER'))
 diset('tpcc','mysql_pass',os.getenv('DB_PASSWD'))
 diset('tpcc','mysql_dbase',os.getenv('DB_NAME'))
 print("DROP SCHEMA STARTED")
+
 deleteschema()
 print("DROP SCHEMA COMPLETED")
 exit()

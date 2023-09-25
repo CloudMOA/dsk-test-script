@@ -21,6 +21,7 @@ diset('connection','maria_port',os.getenv('DB_PORT'))
 diset('tpcc','maria_user',os.getenv('DB_USER'))
 diset('tpcc','maria_pass',os.getenv('DB_PASSWD'))
 diset('tpcc','maria_dbase',os.getenv('DB_NAME'))
+
 print("DROP SCHEMA STARTED")
 deleteschema()
 print("DROP SCHEMA COMPLETED")
