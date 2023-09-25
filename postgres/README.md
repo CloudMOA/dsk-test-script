@@ -4,7 +4,7 @@
 ```
 sudo docker run --name db-create-pg -d --rm \
   -e DB_HOST=10.10.43.105 \
-  -e DB_PORT=31302 \
+  -e DB_PORT=31301 \
   -e DB_NAME=tpcc \
   -e DB_USER=root \
   -e DB_PASSWD=root \
@@ -14,7 +14,7 @@ sudo docker run --name db-create-pg -d --rm \
 
 sudo docker run --name db-run-pg -d \
   -e DB_HOST=10.10.43.105 \
-  -e DB_PORT=31302 \
+  -e DB_PORT=31301 \
   -e DB_NAME=tpcc \
   -e DB_USER=root \
   -e DB_PASSWD=root \
@@ -26,7 +26,7 @@ sudo docker run --name db-run-pg -d \
 
 sudo docker run --name db-delete-pg -d --rm \
   -e DB_HOST=10.10.43.105 \
-  -e DB_PORT=31302 \
+  -e DB_PORT=31301 \
   -e DB_NAME=tpcc \
   -e DB_USER=root \
   -e DB_PASSWD=root \
