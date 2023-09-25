@@ -12,24 +12,24 @@ print(os.getenv('DB_PASSWD'))
 print(os.getenv('EXE_MINUTES'))
 print(os.getenv('SLEEP_MINUTES'))
 
-dbset('db','mysql')
+dbset('db','maria')
 dbset('bm','TPC-C')
 
-diset('connection','mysql_host',os.getenv('DB_HOST'))
-diset('connection','mysql_port',os.getenv('DB_PORT'))
+diset('connection','maria_host',os.getenv('DB_HOST'))
+diset('connection','maria_port',os.getenv('DB_PORT'))
 
 vu = tclpy.eval('numberOfCPUs')
 warehouse = int(vu) * 1
-diset('tpcc','mysql_count_ware',warehouse)
-diset('tpcc','mysql_num_vu',vu)
-diset('tpcc','mysql_user',os.getenv('DB_USER'))
-diset('tpcc','mysql_pass',os.getenv('DB_PASSWD'))
-diset('tpcc','mysql_dbase',os.getenv('DB_NAME'))
-diset('tpcc','mysql_storage_engine','innodb')
+diset('tpcc','maria_count_ware',warehouse)
+diset('tpcc','maria_num_vu',vu)
+diset('tpcc','maria_user',os.getenv('DB_USER'))
+diset('tpcc','maria_pass',os.getenv('DB_PASSWD'))
+diset('tpcc','maria_dbase',os.getenv('DB_NAME'))
+diset('tpcc','maria_storage_engine','innodb')
 if (warehouse >= 200):
-    diset('tpcc','mysql_partition','true')
+    diset('tpcc','maria_partition','true')
 else:
-    diset('tpcc','mysql_partition','false')
+    diset('tpcc','maria_partition','false')
 
 print("SCHEMA BUILD STARTED")
 buildschema()
