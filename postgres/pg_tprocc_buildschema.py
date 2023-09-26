@@ -11,7 +11,7 @@ print("* DB_USER = "+os.getenv('DB_USER'))
 print("* DB_PASSWD = "+os.getenv('DB_PASSWD'))
 print("* DB_POSTGRES_PASSWD = "+os.getenv('DB_POSTGRES_PASSWD'))
 print("* EXE_MINUTES = "+os.getenv('EXE_MINUTES'))
-print("* SLEEP_MINUTES = "+os.getenv('SLEEP_MINUTES'))
+print("* SLEEP_SECONDS = "+os.getenv('SLEEP_SECONDS'))
 
 dbset('db','pg')
 dbset('bm','TPC-C')

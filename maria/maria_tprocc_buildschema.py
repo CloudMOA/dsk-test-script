@@ -10,7 +10,7 @@ print("* DB_NAME = "+os.getenv('DB_NAME'))
 print("* DB_USER = "+os.getenv('DB_USER'))
 print("* DB_PASSWD = "+os.getenv('DB_PASSWD'))
 print("* EXE_MINUTES = "+os.getenv('EXE_MINUTES'))
-print("* SLEEP_MINUTES = "+os.getenv('SLEEP_MINUTES'))
+print("* SLEEP_SECONDS = "+os.getenv('SLEEP_SECONDS'))
 
 dbset('db','maria')
 dbset('bm','TPC-C')
