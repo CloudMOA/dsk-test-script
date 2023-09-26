@@ -57,6 +57,7 @@ while True:
                 print('Rollback')
                 connection.rollback()
                 cur.close()
+                print('---------------------')
             connection.close()
             time.sleep(sleeptime)
     except:

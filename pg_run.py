@@ -40,23 +40,24 @@ querys = open(loadFilePath, 'r')
 loadQueryList = querys.read().split(';')
 querys.close()
 
-# try:
-#     connection = psycopg2.connect(
-#         host=host, dbname='postgres', user=user, password=password, port=port)
-#     connection.autocommit = True
+try:
+    connection = psycopg2.connect(
+        host=host, dbname='postgres', user=user, password=password, port=port)
+    connection.autocommit = True
 
-#     cur = connection.cursor()
-#     for query in initQueryList:
-#         query = query.strip()
-#         if query != '':
-#             print(query)
-#             cur.execute(query)
-#             time.sleep(1)
-#     cur.close()
-#     connection.close()
-# except:
-#     print('Error')
-# time.sleep(sleeptime)
+    cur = connection.cursor()
+    for query in initQueryList:
+        query = query.strip()
+        if query != '':
+            print(query)
+            cur.execute(query)
+            time.sleep(1)
+            print('---------------------')
+    cur.close()
+    connection.close()
+except:
+    print('Error')
+time.sleep(sleeptime)
 
 while True:
     if count > 3:
@@ -77,6 +78,7 @@ while True:
                 print(query)
                 cur.execute(query)
                 time.sleep(1)
+                print('---------------------')
         cur.close()
         connection.close()
     except:

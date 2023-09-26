@@ -52,6 +52,7 @@ try:
             print(query)
             cur.execute(query)
             time.sleep(1)
+            print('---------------------')
     cur.close()
     connection.close()
 except:
@@ -77,6 +78,7 @@ while True:
                 print(query)
                 cur.execute(query)
                 time.sleep(1)
+                print('---------------------')
         cur.close()
         connection.close()
     except:
