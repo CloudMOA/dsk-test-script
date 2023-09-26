@@ -1,8 +1,5 @@
-insert into account(id, hostname, accountid, password, owner, description)
-    values(999999,'tester19','tester19','**********','Ethan,Leo,Noah','abcdefg');
+insert into item(i_id, i_im_id, i_name, i_price, i_data)
+    values(999999,7723,'FtaOuebsTEST',66.84,'stNesDpTEST');
 
-insert into host(id, hosttype, hostname, ip, protocol, description)
-    values(999999,'CentOS5','spammail5','192.168.10.125','SSH','ABCdefghijklmn');
-
-insert into person(id, name, password, email, phone, accountid, permissions, description)
-    values(999999,'Oliver1','**********','Oliver@ex-em.com1','010-1234-56781','none1','User','1234567890sdasf');
+insert into history(h_c_id, h_c_d_id, h_c_w_id, h_d_id, h_w_id, h_date, h_amount, h_data)
+    values(999999,1,1,1,1,'2023-09-07 00:52:51',3723.00,'e3WRFxTEST');

@@ -1,20 +1,18 @@
-select * from (select metadata_namespace, status_phase, status_reason, count(*) as cnt
-    from pod_data group by metadata_namespace, status_phase, status_reason) A
-inner join pod_data B on A.status_phase = B.status_phase
-inner join pod_data C on A.status_phase = C.status_phase
-order by B.metadata_labels asc, B.metadata_name desc, B.spec_hostnetwork desc
+select customer.c_id from customer inner join district d on customer.c_w_id = d.d_w_id and customer.c_d_id = d.d_id
+inner join history h on customer.c_w_id = h.h_c_w_id and customer.c_d_id = h.h_c_d_id and customer.c_id = h.h_c_id
+inner join orders o on customer.c_w_id = o.o_w_id and customer.c_d_id = o.o_d_id and customer.c_id = o.o_c_id
+group by customer.c_id
+order by customer.c_id
 limit 100;
 
-select * from pod_data A
-left outer join pod_data B on A.kind_status = B.status_phase
-left outer join pod_data C on A.kind_status = C.status_phase
-order by B.kind_status desc
+select * from orders inner join customer c on orders.o_w_id = c.c_w_id and orders.o_d_id = c.c_d_id and orders.o_c_id = c.c_id
+inner join history h on c.c_w_id = h.h_c_w_id and c.c_d_id = h.h_c_d_id and c.c_id = h.h_c_id
+inner join district d on c.c_w_id = d.d_w_id and c.c_d_id = d.d_id
+order by d.d_w_id, c.c_credit_lim
 limit 100;
 
-select id, hostname, accountid, owner, description from account where owner like '%Leo%' limit 100;
-
-select id, hosttype, hostname, ip, protocol, description from host limit 100;
-
-select id, name, email, phone, accountid, permissions, description from person limit 100;
-
-select metadata_name, metadata_namespace, metadata_ownerreferences from pod_data limit 100;
+select * from stock
+inner join item i on stock.s_i_id = i.i_id
+inner join order_line ol on stock.s_w_id = ol.ol_supply_w_id and stock.s_i_id = ol.ol_i_id
+inner join orders o on ol.ol_w_id = o.o_w_id and ol.ol_d_id = o.o_d_id and ol.ol_o_id = o.o_id
+order by i.i_id, ol.ol_supply_w_id, ol.ol_w_id limit 100;
