@@ -18,7 +18,3 @@ inner join item i on stock.s_i_id = i.i_id
 inner join order_line ol on stock.s_w_id = ol.ol_supply_w_id and stock.s_i_id = ol.ol_i_id
 inner join orders o on ol.ol_w_id = o.o_w_id and ol.ol_d_id = o.o_d_id and ol.ol_o_id = o.o_id
 order by i.i_id, ol.ol_supply_w_id, ol.ol_w_id limit 100;
-
-delete from history where h_date < DATE_ADD(now(), INTERVAL -30 MINUTE);
-
-delete from order_line where ol_delivery_d < DATE_ADD(now(), INTERVAL -30 MINUTE);
