@@ -66,5 +66,9 @@ while True:
             time.sleep(sleeptime)
     except:
         print('Error')
+        if cur != None:
+            cur.close()
+        if connection != None:
+            connection.close()
     count = count + 1
     print('---------------------')
