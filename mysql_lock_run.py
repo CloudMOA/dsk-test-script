@@ -7,7 +7,8 @@ port = int(os.environ.get('MYSQL_DB_PORT'))
 dbname = os.environ.get('MYSQL_DB_NAME')
 user = os.environ.get('MYSQL_DB_USER')
 password = os.environ.get('MYSQL_DB_PASSWD')
-sleeptime = int(os.environ.get('MARIA_SLEEP'))
+sleeptime = int(os.environ.get('MYSQL_SLEEP'))
+locktime = int(os.environ.get('MYSQL_LOCK_TIME'))
 lockFilePath = "/db_script/mysql_lock_query.sql"
 
 # host = "10.10.43.100"
@@ -16,6 +17,7 @@ lockFilePath = "/db_script/mysql_lock_query.sql"
 # user = "root"
 # password = "root"
 # sleeptime = 5
+# locktime = 60
 # lockFilePath = "mysql_lock_query.sql"
 
 print('---------------------')
@@ -25,6 +27,7 @@ print('dbname: ' + dbname)
 print('user: ' + user)
 print('password: ' + password)
 print('sleep: ' + str(sleeptime))
+print('locktime: ' + str(locktime))
 print('---------------------')
 
 lockQueryList = []
@@ -53,7 +56,7 @@ while True:
                 cur = connection.cursor()
                 print(query)
                 cur.execute(query)
-                time.sleep(60)
+                time.sleep(locktime)
                 print('Rollback')
                 connection.rollback()
                 cur.close()

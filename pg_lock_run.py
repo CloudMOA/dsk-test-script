@@ -7,8 +7,10 @@ port = int(os.environ.get('PG_DB_PORT'))
 dbname = os.environ.get('PG_DB_NAME')
 user = os.environ.get('PG_DB_USER')
 password = os.environ.get('PG_DB_PASSWD')
-sleeptime = int(os.environ.get('MARIA_SLEEP'))
+sleeptime = int(os.environ.get('PG_SLEEP'))
+locktime = int(os.environ.get('PG_LOCK_TIME'))
 lockFilePath = "/db_script/pg_lock_query.sql"
+
 
 # host = "10.10.43.105"
 # port = 32233
@@ -16,6 +18,7 @@ lockFilePath = "/db_script/pg_lock_query.sql"
 # user = "postgres"
 # password = "root"
 # sleeptime = 5
+# locktime = 60
 # lockFilePath = "pg_lock_query.sql"
 
 print('---------------------')
@@ -25,6 +28,7 @@ print('dbname: ' + dbname)
 print('user: ' + user)
 print('password: ' + password)
 print('sleep: ' + str(sleeptime))
+print('locktime: ' + str(locktime))
 print('---------------------')
 
 lockQueryList = []
@@ -53,7 +57,7 @@ while True:
                 cur = connection.cursor()
                 print(query)
                 cur.execute(query)
-                time.sleep(60)
+                time.sleep(locktime)
                 print('Rollback')
                 connection.rollback()
                 cur.close()
