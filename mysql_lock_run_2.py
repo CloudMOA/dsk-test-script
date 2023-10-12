@@ -8,17 +8,15 @@ dbname = os.environ.get('MYSQL_DB_NAME')
 user = os.environ.get('MYSQL_DB_USER')
 password = os.environ.get('MYSQL_DB_PASSWD')
 sleeptime = int(os.environ.get('MYSQL_SLEEP'))
-locktime = int(os.environ.get('MYSQL_LOCK_TIME'))
-lockFilePath = "/db_script/mysql_lock_query.sql"
+loadFilePath = "/db_script/mysql_lock_query_2.sql"
 
-# host = "10.10.43.100"
+# host = "10.10.43.105"
 # port = 31302
 # dbname = "tpcc"
 # user = "root"
 # password = "root"
 # sleeptime = 5
-# locktime = 60
-# lockFilePath = "mysql_lock_query.sql"
+# loadFilePath = "mysql_lock_query_2.sql"
 
 print('---------------------')
 print('host: ' + host)
@@ -27,43 +25,39 @@ print('dbname: ' + dbname)
 print('user: ' + user)
 print('password: ' + password)
 print('sleep: ' + str(sleeptime))
-print('locktime: ' + str(locktime))
 print('---------------------')
 
-lockQueryList = []
+loadQueryList = []
 count = 0
 
-querys = open(lockFilePath, 'r')
-lockQueryList = querys.read().split(';')
+querys = open(loadFilePath, 'r')
+loadQueryList = querys.read().split(';')
 querys.close()
 
 while True:
     if count > 3:
-        querys = open(lockFilePath, 'r')
-        lockQueryList = querys.read().split(';')
+        querys = open(loadFilePath, 'r')
+        loadQueryList = querys.read().split(';')
         querys.close()
         count = 0
 
     try:
-        for query in lockQueryList:
+        connection = pymysql.connect(
+            host=host, database=dbname, user=user, password=password, port=port)
+        connection.autocommit = True
+
+        cur = connection.cursor()
+        for query in loadQueryList:
             query = query.strip()
-
-            connection = pymysql.connect(
-                host=host, database=dbname, user=user, password=password, port=port)
-            connection.autocommit = False
-
             if query != '':
-                cur = connection.cursor()
                 print(query)
                 cur.execute(query)
-                time.sleep(locktime)
-                print('Rollback')
-                connection.rollback()
-                cur.close()
+                time.sleep(1)
                 print('---------------------')
-            connection.close()
-            time.sleep(sleeptime)
+        cur.close()
+        connection.close()
     except:
         print('Error')
+    time.sleep(sleeptime)
     count = count + 1
     print('---------------------')

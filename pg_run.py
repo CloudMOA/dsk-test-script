@@ -7,7 +7,7 @@ port = int(os.environ.get('PG_DB_PORT'))
 dbname = os.environ.get('PG_DB_NAME')
 user = os.environ.get('PG_DB_USER')
 password = os.environ.get('PG_DB_PASSWD')
-sleeptime = int(os.environ.get('MARIA_SLEEP'))
+sleeptime = int(os.environ.get('PG_SLEEP'))
 initFilePath = "/db_script/pg_init_query.sql"
 loadFilePath = "/db_script/pg_load_query.sql"
 

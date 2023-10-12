@@ -20,11 +20,3 @@ order by i.i_id, ol.ol_supply_w_id, ol.ol_w_id limit 100;
 select * from order_line
 inner join orders a on ol_d_id=a.o_d_id and o_c_id=a.o_c_id
 inner join history h on a.o_d_id=h.h_c_d_id limit 200;
-
-insert into item(i_id, i_im_id, i_name, i_price, i_data)
-    values(888888,7723,'FtaOuebsTEST',66.84,'stNesDpTEST');
-delete from item where i_id=888888;
-
-insert into history(h_c_id, h_c_d_id, h_c_w_id, h_d_id, h_w_id, h_date, h_amount, h_data)
-    values(888888,1,1,1,1,'2023-09-07 00:52:51',3723.00,'e3WRFxTEST');
-delete from history where i_id=888888;

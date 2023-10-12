@@ -7,7 +7,7 @@ port = int(os.environ.get('MYSQL_DB_PORT'))
 dbname = os.environ.get('MYSQL_DB_NAME')
 user = os.environ.get('MYSQL_DB_USER')
 password = os.environ.get('MYSQL_DB_PASSWD')
-sleeptime = int(os.environ.get('MARIA_SLEEP'))
+sleeptime = int(os.environ.get('MYSQL_SLEEP'))
 initFilePath = "/db_script/mysql_init_query.sql"
 loadFilePath = "/db_script/mysql_load_query.sql"
 
