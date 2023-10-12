@@ -24,6 +24,10 @@ python /db_script/maria_lock_run_1.py &
 echo "Running maria_lock_run_1.py"
 sleep 1
 
+python /db_script/maria_lock_run_1.py &
+echo "Running maria_lock_run_1.py"
+sleep 1
+
 python /db_script/maria_lock_run_2.py &
 echo "Running maria_lock_run_2.py"
 sleep 1
