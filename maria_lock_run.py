@@ -53,7 +53,7 @@ while True:
                 cur = connection.cursor()
                 print(query)
                 cur.execute(query)
-                time.sleep(30)
+                time.sleep(60)
                 print('Rollback')
                 connection.rollback()
                 cur.close()
