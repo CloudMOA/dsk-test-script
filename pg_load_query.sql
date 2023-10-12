@@ -26,16 +26,3 @@ inner join orders o on ol.ol_w_id = o.o_w_id and ol.ol_d_id = o.o_d_id and ol.ol
 order by i.i_id, ol.ol_supply_w_id, ol.ol_w_id limit 100;
 
 delete from history where i_id=999899;
-
-select * from
-(select * from stock
-inner join item i on stock.s_i_id = i.i_id
-inner join order_line ol on stock.s_w_id = ol.ol_supply_w_id and stock.s_i_id = ol.ol_i_id
-inner join orders o on ol.ol_w_id = o.o_w_id and ol.ol_d_id = o.o_d_id and ol.ol_o_id = o.o_id
-union
-select * from stock
-inner join item i on stock.s_i_id = i.i_id
-inner join order_line ol on stock.s_w_id = ol.ol_supply_w_id and stock.s_i_id = ol.ol_i_id
-inner join orders o on ol.ol_w_id = o.o_w_id and ol.ol_d_id = o.o_d_id and ol.ol_o_id = o.o_id) K
-order by K.i_id, K.ol_supply_w_id, K.ol_w_id
-limit 100;
