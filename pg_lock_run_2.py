@@ -1,6 +1,7 @@
 import psycopg2
 import time
 import os
+import random
 
 host = os.environ.get('PG_DB_HOST')
 port = int(os.environ.get('PG_DB_PORT'))
@@ -52,7 +53,7 @@ while True:
             if query != '':
                 print(query)
                 cur.execute(query)
-                time.sleep(1)
+                time.sleep(random.randrange(1,5))
                 print('---------------------')
         cur.close()
         connection.close()
@@ -62,6 +63,6 @@ while True:
             cur.close()
         if connection != None:
             connection.close()
-    time.sleep(sleeptime)
+    time.sleep(random.randrange(1,sleeptime))
     count = count + 1
     print('---------------------')
