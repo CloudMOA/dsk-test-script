@@ -20,3 +20,9 @@ order by i.i_id, ol.ol_supply_w_id, ol.ol_w_id limit 100;
 select * from order_line
 inner join orders a on ol_d_id=a.o_d_id and o_c_id=a.o_c_id
 inner join history h on a.o_d_id=h.h_c_d_id limit 200;
+
+select * from order_line
+inner join orders a on ol_d_id=a.o_d_id and o_c_id=a.o_c_id
+union
+select * from order_line
+inner join orders a on ol_d_id=a.o_d_id and o_c_id=a.o_c_id limit 100;
